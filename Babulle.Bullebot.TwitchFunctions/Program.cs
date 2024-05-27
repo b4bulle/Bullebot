@@ -20,7 +20,7 @@ var host = new HostBuilder()
         services.AddHttpClient(HttpClientNames.Discord, client =>
         {
             client.BaseAddress = new Uri("https://discord.com");
-            var token = Environment.GetEnvironmentVariable("DISCORD_BULLEBOT_TOKEN", EnvironmentVariableTarget.User);
+            var token = Environment.GetEnvironmentVariable("DISCORD_BULLEBOT_TOKEN", EnvironmentVariableTarget.Process);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", token);
         });
 

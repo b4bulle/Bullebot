@@ -11,8 +11,8 @@ public class TwitchOAuthTokenProvider(IHttpClientFactory clientFactory)
     {
         var payload = new List<KeyValuePair<string, string>>()
         {
-            new("client_id", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_ID", EnvironmentVariableTarget.User)?? ""),
-            new("client_secret", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_SECRET", EnvironmentVariableTarget.User)?? ""),
+            new("client_id", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_ID", EnvironmentVariableTarget.Process)?? ""),
+            new("client_secret", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_SECRET", EnvironmentVariableTarget.Process)?? ""),
             new("grant_type", "client_credentials")
         };
 
