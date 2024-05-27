@@ -4,16 +4,17 @@ using Babulle.Bullebot.DiscordActions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults()
+    .ConfigureFunctionsWebApplication()
     .ConfigureServices(services =>
     {
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         });
-        
+
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddHttpClient(HttpClientNames.Discord, client =>
@@ -23,8 +24,19 @@ var host = new HostBuilder()
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", token);
         });
 
+        services.Configure<LoggerFilterOptions>(options =>
+        {
+            LoggerFilterRule? toRemove = options.Rules.FirstOrDefault(rule => rule.ProviderName
+                                                                              == "Microsoft.Extensions.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider");
+
+            if (toRemove is not null)
+            {
+                options.Rules.Remove(toRemove);
+            }
+        });
+
         services.AddTransient<SendMessageService>();
     })
     .Build();
 
-host.Run();
+await host.RunAsync();
