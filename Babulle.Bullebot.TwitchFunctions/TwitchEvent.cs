@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using System.Text.Json;
 using Babulle.Bullebot.TwitchFunctions.Commands;
 using MediatR;
 using Microsoft.Azure.Functions.Worker;
@@ -19,6 +20,8 @@ public class TwitchEvent(ILoggerFactory loggerFactory, IMediator mediator)
 
         var command = TwitchEventCommandFactory.CreateEventCommand(req);
 
+        _logger.LogInformation(JsonSerializer.Serialize(command));
+        
         var commandResult = await mediator.Send(command);
         
         var response = req.CreateResponse(commandResult.StatusCode);
