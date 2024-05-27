@@ -1,0 +1,6 @@
+@Babulle.DebugApi_HostAddress = http://localhost:5079
+
+GET {{Babulle.DebugApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babulle.Bullebot.Core", "Babulle.Bullebot.Core\Babulle.Bullebot.Core.csproj", "{B010D416-8ABE-4DFB-AC7C-76FF1D4DF176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babulle.Bullebot.DebugApi", "Babulle.Bullebot.DebugApi\Babulle.Bullebot.DebugApi.csproj", "{0EB69C59-7E13-4008-9B6B-112CE21CD76D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babulle.Bullebot.DiscordActions", "Babulle.Bullebot.DiscordActions\Babulle.Bullebot.DiscordActions.csproj", "{D54C46D4-C004-4694-B795-DC04F50F9DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babulle.Bullebot.Twitch.Infrastructure", "Babulle.Bullebot.Twitch.Infrastructure\Babulle.Bullebot.Twitch.Infrastructure.csproj", "{C77568A6-BC7E-42AE-8D4F-225253BA8E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babulle.Bullebot.TwitchFunctions", "Babulle.Bullebot.TwitchFunctions\Babulle.Bullebot.TwitchFunctions.csproj", "{60DAF25C-B6F7-4336-8AA4-121DBD1034C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B010D416-8ABE-4DFB-AC7C-76FF1D4DF176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B010D416-8ABE-4DFB-AC7C-76FF1D4DF176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B010D416-8ABE-4DFB-AC7C-76FF1D4DF176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B010D416-8ABE-4DFB-AC7C-76FF1D4DF176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB69C59-7E13-4008-9B6B-112CE21CD76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB69C59-7E13-4008-9B6B-112CE21CD76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB69C59-7E13-4008-9B6B-112CE21CD76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB69C59-7E13-4008-9B6B-112CE21CD76D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54C46D4-C004-4694-B795-DC04F50F9DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54C46D4-C004-4694-B795-DC04F50F9DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54C46D4-C004-4694-B795-DC04F50F9DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54C46D4-C004-4694-B795-DC04F50F9DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77568A6-BC7E-42AE-8D4F-225253BA8E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77568A6-BC7E-42AE-8D4F-225253BA8E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77568A6-BC7E-42AE-8D4F-225253BA8E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77568A6-BC7E-42AE-8D4F-225253BA8E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60DAF25C-B6F7-4336-8AA4-121DBD1034C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60DAF25C-B6F7-4336-8AA4-121DBD1034C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60DAF25C-B6F7-4336-8AA4-121DBD1034C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60DAF25C-B6F7-4336-8AA4-121DBD1034C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
