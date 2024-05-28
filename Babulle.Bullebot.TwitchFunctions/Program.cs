@@ -2,12 +2,18 @@ using System.Net.Http.Headers;
 using Babulle.Bullebot.Core;
 using Babulle.Bullebot.DiscordActions;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
+    .ConfigureAppConfiguration(configure =>
+    {
+        var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+        configure.AddAzureAppConfiguration(connectionString);
+    })
     .ConfigureServices(services =>
     {
         services.AddMediatR(configuration =>
@@ -15,6 +21,8 @@ var host = new HostBuilder()
             configuration.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         });
 
+        services.AddAzureAppConfiguration();
+        
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddHttpClient(HttpClientNames.Discord, client =>
@@ -27,8 +35,7 @@ var host = new HostBuilder()
         services.Configure<LoggerFilterOptions>(options =>
         {
             LoggerFilterRule? toRemove = options.Rules.FirstOrDefault(rule => rule.ProviderName
-                                                                              ==
-                                                                              "Microsoft.Extensions.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider");
+                                                                              == "Microsoft.Extensions.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider");
 
             if (toRemove is not null)
             {
