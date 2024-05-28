@@ -27,7 +27,8 @@ var host = new HostBuilder()
         services.Configure<LoggerFilterOptions>(options =>
         {
             LoggerFilterRule? toRemove = options.Rules.FirstOrDefault(rule => rule.ProviderName
-                                                                              == "Microsoft.Extensions.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider");
+                                                                              ==
+                                                                              "Microsoft.Extensions.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider");
 
             if (toRemove is not null)
             {

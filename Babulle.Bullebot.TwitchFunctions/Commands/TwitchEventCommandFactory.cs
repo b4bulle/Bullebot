@@ -1,24 +1,24 @@
 ﻿using System.Text.Json;
-using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace Babulle.Bullebot.TwitchFunctions.Commands;
 
 public static class TwitchEventCommandFactory
 {
-    public static ITwitchEventCommand CreateEventCommand(HttpRequestData requestData)
+    public static async Task<ITwitchEventCommand> CreateEventCommandAsync(HttpRequest requestData)
     {
-        return requestData.Headers.GetValues("Twitch-Eventsub-Message-Type").Single() switch
+        return requestData.Headers["Twitch-Eventsub-Message-Type"].Single() switch
         {
-            "webhook_callback_verification" => ParseEventCommand<TwitchChallengeCommand>(requestData.Body),
-            "notification" => ParseEventCommand<TwitchStreamUpCommand>(requestData.Body),
+            "webhook_callback_verification" => await ParseEventCommand<TwitchChallengeCommand>(requestData.Body),
+            "notification" => await ParseEventCommand<TwitchStreamUpCommand>(requestData.Body),
             _ => throw new ArgumentException()
         };
     }
 
-    private static T ParseEventCommand<T>(Stream requestBody) where T : ITwitchEventCommand
+    private static async Task<T> ParseEventCommand<T>(Stream requestBody) where T : ITwitchEventCommand
     {
         using var streamReader = new StreamReader(requestBody);
-        var json = streamReader.ReadToEnd();
+        var json = await streamReader.ReadToEndAsync();
         var command = JsonSerializer.Deserialize<T>(json);
 
         if (command == null)
