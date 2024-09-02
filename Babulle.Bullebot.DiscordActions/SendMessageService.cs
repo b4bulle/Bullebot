@@ -7,17 +7,25 @@ namespace Babulle.Bullebot.DiscordActions;
 public class SendMessageService(ILoggerFactory loggerFactory, IHttpClientFactory httpClientFactory)
 {
     private const string DiscordCreateMessageApiEndpoint = "api/v10/channels/{0}/messages";
-    
+
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient(HttpClientNames.Discord);
     private readonly ILogger _logger = loggerFactory.CreateLogger<SendMessageService>();
 
     public async Task ExecuteAsync(SendMessageCommand sendMessageCommand)
     {
-        var dto = new DiscordCreateMessageDto(sendMessageCommand.Message, false);
+        var messageBuilder = DiscordCreateMessageDtoBuilder.CreateDiscordMessageBuilder(sendMessageCommand.Message);
 
-        var content = JsonContent.Create(dto);
+        foreach (var roleId in sendMessageCommand.MentionRoleId)
+        {
+            messageBuilder.AddMentionRole(roleId);
+        }
 
-        var responseMessage = await _httpClient.PostAsync(string.Format(DiscordCreateMessageApiEndpoint, sendMessageCommand.ChannelId), content);
+        var message = messageBuilder.Build();
+        var content = JsonContent.Create(message);
+
+        var responseMessage =
+            await _httpClient.PostAsync(string.Format(DiscordCreateMessageApiEndpoint, sendMessageCommand.ChannelId),
+                content);
 
         if (!responseMessage.IsSuccessStatusCode)
         {

@@ -28,7 +28,7 @@ public class TwitchEvent(ILoggerFactory loggerFactory, IMediator mediator)
 
         if (commandResult.StatusCode == HttpStatusCode.OK)
         {
-            return new ContentResult()
+            return new ContentResult
             {
                 Content = commandResult.Response,
                 StatusCode = (int)commandResult.StatusCode,
