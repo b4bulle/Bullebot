@@ -22,7 +22,7 @@ public class ConfigFunction(ILoggerFactory loggerFactory, IConfiguration configu
         _logger.LogInformation("C# HTTP trigger function processed a request.");
 
         // Read configuration data
-        var keyName = "TestApp:Settings:Message";
+        var keyName = "Bullebot:Discord:SendStreamUpNotification:Channel";
         var message = configuration[keyName];
 
         return message != null

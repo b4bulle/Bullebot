@@ -1,3 +1,3 @@
 ﻿namespace Babulle.Bullebot.DiscordActions;
 
-public record SendMessageCommand(string ChannelId, string Message);
+public record SendMessageCommand(ulong ChannelId, string Message, List<ulong> MentionRoleId);
