@@ -2,7 +2,6 @@
 using Babulle.Bullebot.TwitchFunctions.Commands;
 using Babulle.Bullebot.TwitchFunctions.Responses;
 using MediatR;
-using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Babulle.Bullebot.TwitchFunctions.CommandHandlers;
 

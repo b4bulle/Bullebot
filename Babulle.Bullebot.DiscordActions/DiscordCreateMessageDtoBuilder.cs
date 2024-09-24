@@ -3,7 +3,6 @@
 public class DiscordCreateMessageDtoBuilder
 {
     private readonly string _content;
-    private List<ulong> _mentionsRoleId = [];
     private bool _isTts = false;
 
     private DiscordCreateMessageDtoBuilder(string content)
@@ -19,12 +18,6 @@ public class DiscordCreateMessageDtoBuilder
     public DiscordCreateMessageDtoBuilder SetTts(bool isTts)
     {
         _isTts = isTts;
-        return this;
-    }
-
-    public DiscordCreateMessageDtoBuilder AddMentionRole(ulong roleId)
-    {
-        _mentionsRoleId.Add(roleId);
         return this;
     }
     
