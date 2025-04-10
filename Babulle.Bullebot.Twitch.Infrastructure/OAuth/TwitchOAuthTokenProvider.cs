@@ -1,9 +1,10 @@
-﻿using System.Net.Http.Json;
-using Babulle.Bullebot.Core;
+﻿using Babulle.Bullebot.Core;
+using Babulle.Bullebot.Twitch.Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Babulle.Bullebot.Twitch.Infrastructure.OAuth;
 
-public class TwitchOAuthTokenProvider(IHttpClientFactory clientFactory)
+public class TwitchOAuthTokenProvider(IHttpClientFactory clientFactory, IOptions<TwitchConfiguration> twitchConfiguration)
 {
     private readonly HttpClient _httpClient = clientFactory.CreateClient(HttpClientNames.TwitchAuth);
 
@@ -11,8 +12,8 @@ public class TwitchOAuthTokenProvider(IHttpClientFactory clientFactory)
     {
         var payload = new List<KeyValuePair<string, string>>()
         {
-            new("client_id", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_ID", EnvironmentVariableTarget.Process)?? ""),
-            new("client_secret", Environment.GetEnvironmentVariable("TWITCH_BULLEBOT_SECRET", EnvironmentVariableTarget.Process)?? ""),
+            new("client_id", twitchConfiguration.Value.ClientId),
+            new("client_secret", twitchConfiguration.Value.ClientSecret),
             new("grant_type", "client_credentials")
         };
 

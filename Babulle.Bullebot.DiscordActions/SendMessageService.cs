@@ -15,11 +15,6 @@ public class SendMessageService(ILoggerFactory loggerFactory, IHttpClientFactory
     {
         var messageBuilder = DiscordCreateMessageDtoBuilder.CreateDiscordMessageBuilder(sendMessageCommand.Message);
 
-        foreach (var roleId in sendMessageCommand.MentionRoleId)
-        {
-            messageBuilder.AddMentionRole(roleId);
-        }
-
         var message = messageBuilder.Build();
         var content = JsonContent.Create(message);
 

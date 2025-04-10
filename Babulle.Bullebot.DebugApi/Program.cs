@@ -15,10 +15,10 @@ builder.Services.AddSingleton<TwitchOAuthTokenProvider>();
 builder.Services.AddSingleton<TwitchStreamInformationProvider>();
 
 builder.Services.AddHttpClient(HttpClientNames.TwitchAuth,
-    client => { client.BaseAddress = new Uri("https://api.twitch.tv"); });
+    client => { client.BaseAddress = new Uri("https://id.twitch.tv"); });
 
 builder.Services.AddHttpClient(HttpClientNames.TwitchApi,
-        client => { client.BaseAddress = new Uri("https://id.twitch.tv"); })
+        client => { client.BaseAddress = new Uri("https://api.twitch.tv"); })
     .AddHttpMessageHandler<TwitchTokenMessageHandler>();
 
 var app = builder.Build();

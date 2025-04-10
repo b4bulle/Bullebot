@@ -1,8 +1,10 @@
-﻿namespace Babulle.Bullebot.TwitchFunctions.Configuration;
+﻿using System.Collections.ObjectModel;
+
+namespace Babulle.Bullebot.TwitchFunctions.Configuration;
 
 public class DiscordStreamUpConfiguration
 {
-    public ulong Channel { get; set; }
+    public ulong Channel { get; init; }
     
-    public List<ulong> NotifiedRoles { get; set; } = []; 
+    public IReadOnlyList<ulong> NotifiedRoles { get; init; } = []; 
 }
