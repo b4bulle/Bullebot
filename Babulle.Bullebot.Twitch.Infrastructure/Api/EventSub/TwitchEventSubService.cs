@@ -19,6 +19,8 @@ public class TwitchEventSubService(IHttpClientFactory clientFactory, IOptions<Tw
                 twitchConfiguration.Value.WebhookSecret));
         var content = JsonContent.Create(twitchEventSubDto);
         
+        _httpClient.DefaultRequestHeaders.Add("Client-Id", twitchConfiguration.Value.ClientId);
+        
         var responseMessage = await _httpClient.PostAsync(uri, content);
     }
 }

@@ -8,7 +8,7 @@ public class TwitchConfiguration
     
     public string ChannelId { get; init; } = string.Empty;
 
-    public Uri StreamUpWebhookUri { get; set; } = new("");
+    public required Uri StreamUpWebhookUri { get; set; }
     
-    public string WebhookSecret { get; init; }
+    public string WebhookSecret { get; init; } = string.Empty;
 }

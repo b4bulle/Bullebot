@@ -2,8 +2,10 @@ using System.Configuration;
 using System.Net.Http.Headers;
 using Babulle.Bullebot.Core;
 using Babulle.Bullebot.DiscordActions;
+using Babulle.Bullebot.Twitch.Infrastructure;
 using Babulle.Bullebot.Twitch.Infrastructure.Api.EventSub;
 using Babulle.Bullebot.Twitch.Infrastructure.Configuration;
+using Babulle.Bullebot.Twitch.Infrastructure.OAuth;
 using Babulle.Bullebot.TwitchFunctions.Configuration;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
@@ -71,6 +73,16 @@ var host = new HostBuilder()
             var token = discordConfiguration.Value.BotToken;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", token);
         });
+        
+        services.AddSingleton<TwitchTokenMessageHandler>();
+        services.AddSingleton<TwitchOAuthTokenProvider>();
+        
+        services.AddHttpClient(HttpClientNames.TwitchAuth,
+            client => { client.BaseAddress = new Uri("https://id.twitch.tv"); });
+
+        services.AddHttpClient(HttpClientNames.TwitchApi,
+                client => { client.BaseAddress = new Uri("https://api.twitch.tv"); })
+            .AddHttpMessageHandler<TwitchTokenMessageHandler>();
 
         services.Configure<LoggerFilterOptions>(options =>
         {
